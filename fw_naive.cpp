@@ -12,6 +12,12 @@ int V;
 
 int main() {
 	scanf("%d", &V);
+
+	// set to power of 2
+	int _V = 1;
+	while(_V < V) _V <<= 1;
+	V = _V;
+	db(V);
 	// V = 10;
 	int **dist = new int*[V];
 	for(int i = 0; i < V; i++) dist[i] = new int[V];
