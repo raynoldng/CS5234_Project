@@ -21,13 +21,13 @@ int main() {
 			dist[i][j] = INF;
 	
 	int u, v;
-	
-	while(scanf(" %d %d", &u, &v)) {
+	printf("Reading data\n");
+	while(scanf(" %d %d", &u, &v) != EOF) {
 		dist[u][v] = dist[v][u] = 1;
 	}
 
+	printf("Running Floyd Warshall\n");
 	for(int k = 0; k < V; k++) {
-		if(k % 100) db(k);
 		for(int i = 0; i < V; i++) {
 			for(int j = 0; j < V; j++) {
 				dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j]);
