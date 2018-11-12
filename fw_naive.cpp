@@ -29,7 +29,7 @@ int main() {
 			dist[i][j] = INF;
 	
 	int u, v;
-	printf("Reading data\n");
+	// printf("Reading data\n");
 	while(scanf(" %d %d", &u, &v) != EOF) {
 		dist[u][v] = dist[v][u] = 1;
 	}
@@ -39,7 +39,7 @@ int main() {
 	
 
 
-	printf("Running Floyd Warshall\n");
+	// printf("Running Floyd Warshall\n");
 	for(int k = 0; k < V; k++) {
 		for(int i = 0; i < V; i++) {
 			for(int j = 0; j < V; j++) {
