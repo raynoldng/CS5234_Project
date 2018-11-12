@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+#include <time.h>
+
 using namespace std;
 
 #define db(x) cerr << #x << "=" << x << endl
@@ -32,6 +34,11 @@ int main() {
 		dist[u][v] = dist[v][u] = 1;
 	}
 
+	
+	time_t start = time(0);
+	
+
+
 	printf("Running Floyd Warshall\n");
 	for(int k = 0; k < V; k++) {
 		for(int i = 0; i < V; i++) {
@@ -41,12 +48,15 @@ int main() {
 		}
 	}
 
+	double seconds_since_start = difftime( time(0), start);
+	cout << "time: " << seconds_since_start << endl;
+	
 	// print out the first 10
-	for(int i = 0; i < TEST_V; i++) {
-		for(int j = 0; j < TEST_V; j++) {
-			printf("%d\t", dist[i][j]);
-		}
-		printf("\n");
-	}
+	// for(int i = 0; i < TEST_V; i++) {
+	// 	for(int j = 0; j < TEST_V; j++) {
+	// 		printf("%d\t", dist[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
 
 }

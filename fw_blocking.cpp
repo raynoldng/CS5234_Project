@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <time.h>
 using namespace std;
 
 #define db(x) cerr << #x << "=" << x << endl
@@ -14,6 +15,7 @@ typedef pair<int, int> ii;
 int N;
 // int arr[1024 * 1024];
 int *arr;
+
 
 inline int index(int r, int c) { return r*N + c; }
 
@@ -69,14 +71,20 @@ int main() {
 	}
 
 	printf("Running Floyd Warshall\n");
+
+	time_t start = time(0);
+	
 	FWR_FAST(arr, arr, arr, N);
 
+	double seconds_since_start = difftime( time(0), start);
+	cout << "time: " << seconds_since_start << endl;
+
 	// print out the first 10
-	for(int i = 0; i < min(N, TEST_V); i++) {
-		for(int j = 0; j < min(N, TEST_V); j++) {
-			printf("%d\t", arr[index(i, j)]);
-		}
-		printf("\n");
-	}
+	// for(int i = 0; i < min(N, TEST_V); i++) {
+	// 	for(int j = 0; j < min(N, TEST_V); j++) {
+	// 		printf("%d\t", arr[index(i, j)]);
+	// 	}
+	// 	printf("\n");
+	// }
 
 }
