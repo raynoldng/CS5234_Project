@@ -9,7 +9,7 @@ using namespace std;
 #define INF 1e8
 #define TEST_V 10
 // #define BASE 32
-int BASE = 2;
+int BASE = 32;
 int N;
 int *arr, *backup;
 
@@ -25,8 +25,9 @@ void FWI_FAST(int *A, int *B, int *C, const int s) {
 	for(int k = 0; k < s; k++) {
 		for(int i = 0; i < s; i++) {
 			for(int j = 0; j < s; j++) {
-				A[i*N+j] = min(A[i*N+j],
-							   B[i*N+k]+C[k*N+j]);
+				if(A[i*N+j] < B[i*N+k]+C[k*N+j]) {
+					A[i*N+j] = B[i*N+k]+C[k*N+j];
+				}
 			}
 		}
 	}
@@ -50,11 +51,11 @@ void FWR_FAST(int *A, int *B, int *C, const int s) {
 
 void run() {
 	copy();
-	cout << "Base: " << BASE << endl;
+	printf("Base: %d\n", BASE);
 	time_t start = time(0);
 	FWR_FAST(arr, arr, arr, N);
 	double seconds_since_start = difftime( time(0), start);
-	cout << "time: " << seconds_since_start << endl;
+	printf("Time: %f\n", seconds_since_start);
 }
 
 int main() {
@@ -76,13 +77,12 @@ int main() {
 		backup[index(u, v)] = backup[index(v, u)] = 1;
 	}
 
+	run();
 	// while(BASE <= 1024) {
 	// 	run();
 	// 	BASE = BASE * 2;
 	// }
 
-	BASE = 128;
-	run();
 	// cout << "time: " << seconds_since_start << endl;
 
 	// print out the first 10

@@ -11,6 +11,7 @@ using namespace std;
 #define TEST_V 10
 
 int V;
+int dist[8192][8192];
 
 int main() {
 	scanf("%d", &V);
@@ -21,8 +22,8 @@ int main() {
 	V = _V;
 	db(V);
 	// V = 10;
-	int **dist = new int*[V];
-	for(int i = 0; i < V; i++) dist[i] = new int[V];
+	// int **dist = new int*[V];
+	// for(int i = 0; i < V; i++) dist[i] = new int[V];
 
 	for(int i = 0; i < V; i++)
 		for(int j = 0; j < V; j++)
@@ -43,14 +44,17 @@ int main() {
 	for(int k = 0; k < V; k++) {
 		for(int i = 0; i < V; i++) {
 			for(int j = 0; j < V; j++) {
-				dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j]);
+				// dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j]);
+				if(dist[i][j] > dist[i][k] + dist[k][j]) {
+					dist[i][j] = dist[i][k] + dist[k][j];
+				}
 			}
 		}
 	}
 
 	double seconds_since_start = difftime( time(0), start);
-	cout << "time: " << seconds_since_start << endl;
-	
+	// cout << "time: " << seconds_since_start << endl;
+	printf("time: %f\n", seconds_since_start);
 	// print out the first 10
 	// for(int i = 0; i < TEST_V; i++) {
 	// 	for(int j = 0; j < TEST_V; j++) {
