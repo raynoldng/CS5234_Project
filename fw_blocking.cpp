@@ -8,7 +8,7 @@ using namespace std;
 
 #define INF 1e8
 #define TEST_V 10
-#define BASE 60
+#define BASE 32
 // seems like BASE 100 is the best
 
 typedef pair<int, int> ii;
