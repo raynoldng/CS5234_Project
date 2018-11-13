@@ -8,7 +8,7 @@ using namespace std;
 
 #define INF 1e8
 #define TEST_V 10
-#define BASE 100 
+#define BASE 60
 // seems like BASE 100 is the best
 
 typedef pair<int, int> ii;
@@ -39,29 +39,14 @@ void FWR_FAST(int *A, int *B, int *C, const int s) {
 		return;
 	}
 
-	int k = s / 2;
-	// int *A11 = A, *A12 = A + k, *A21 = A + N*k, *A22 = A + N*k + k; 
-	// int *B11 = B, *B12 = B + k, *B21 = B + N*k, *B22 = B + N*k + k; 
-	// int *C11 = C, *C12 = C + k, *C21 = C + N*k, *C22 = C + N*k + k; 
-
-
-	// FWR_FAST(A11, B11, C11, k);
-	// FWR_FAST(A12, B11, C12, k);
-	// FWR_FAST(A21, B21, C11, k);
-	// FWR_FAST(A22, B21, C12, k);
-	// FWR_FAST(A22, B22, C22, k);
-	// FWR_FAST(A21, B22, C21, k);
-	// FWR_FAST(A12, B12, C22, k);
-	// FWR_FAST(A11, B12, C21, k);
-
-	FWR_FAST(A, 			B, 				C, k);
-	FWR_FAST(A + k, 		B, 				C + k, k);
-	FWR_FAST(A + N*k, 		B + N*k, 		C, k);
-	FWR_FAST(A + N*k + k,	B + N*k, 		C + k, k);
-	FWR_FAST(A + N*k + k,	B + N*k + k, 	C + N*k + k, k);
-	FWR_FAST(A + N*k, 		B + N*k + k, 	C + N*k, k);
-	FWR_FAST(A + k, 		B + k, 			C + N*k + k, k);
-	FWR_FAST(A, 			B + k, 			C + N*k, k);
+	FWR_FAST(A, 					B, 						C, (s/2));
+	FWR_FAST(A + (s/2), 			B, 						C + (s/2), (s/2));
+	FWR_FAST(A + N*(s/2), 			B + N*(s/2), 			C, (s/2));
+	FWR_FAST(A + N*(s/2) + (s/2),	B + N*(s/2), 			C + (s/2), (s/2));
+	FWR_FAST(A + N*(s/2) + (s/2),	B + N*(s/2) + (s/2), 	C + N*(s/2) + (s/2), (s/2));
+	FWR_FAST(A + N*(s/2), 			B + N*(s/2) + (s/2), 	C + N*(s/2), (s/2));
+	FWR_FAST(A + (s/2), 			B + (s/2), 				C + N*(s/2) + (s/2), (s/2));
+	FWR_FAST(A, 					B + (s/2), 				C + N*(s/2), (s/2));
 }
 
 int main() {
