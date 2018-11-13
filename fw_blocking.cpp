@@ -8,24 +8,23 @@ using namespace std;
 
 #define INF 1e8
 #define TEST_V 10
-#define BASE 32
-// seems like BASE 100 is the best
-
-typedef pair<int, int> ii;
-
+// #define BASE 32
+int BASE = 2;
 int N;
-// int arr[1024 * 1024];
-int *arr;
+int *arr, *backup;
+
+void copy() {
+	for(int i = 0; i < N*N; i++) arr[i] = backup[i];
+}
 
 
 inline int index(int r, int c) { return r*N + c; }
 
 void FWI_FAST(int *A, int *B, int *C, const int s) {
+	// assert(A==B && A==C);
 	for(int k = 0; k < s; k++) {
 		for(int i = 0; i < s; i++) {
 			for(int j = 0; j < s; j++) {
-				// A[index(i, j)] = min(A[index(i, j)],
-				// 					 B[index(i, k)] + C[index(k, j)]);
 				A[i*N+j] = min(A[i*N+j],
 							   B[i*N+k]+C[k*N+j]);
 			}
@@ -49,6 +48,15 @@ void FWR_FAST(int *A, int *B, int *C, const int s) {
 	FWR_FAST(A, 					B + (s/2), 				C + N*(s/2), (s/2));
 }
 
+void run() {
+	copy();
+	cout << "Base: " << BASE << endl;
+	time_t start = time(0);
+	FWR_FAST(arr, arr, arr, N);
+	double seconds_since_start = difftime( time(0), start);
+	cout << "time: " << seconds_since_start << endl;
+}
+
 int main() {
 	scanf("%d", &N);
 	int _N = 1;
@@ -56,25 +64,26 @@ int main() {
 	N = _N;
 	db(N);
 	arr = new int[N*N];
+	backup = new int[N*N];
 
 	for(int i = 0; i < N; i++)
 		for(int j = 0; j < N; j++)
-			arr[index(i, j)] = INF;
+			backup[index(i, j)] = INF;
 	
 	int u, v;
 	// printf("Reading data\n");
 	while(scanf(" %d %d", &u, &v) != EOF) {
-		arr[index(u, v)] = arr[index(v, u)] = 1;
+		backup[index(u, v)] = backup[index(v, u)] = 1;
 	}
 
-	// printf("Running Floyd Warshall\n");
+	// while(BASE <= 1024) {
+	// 	run();
+	// 	BASE = BASE * 2;
+	// }
 
-	time_t start = time(0);
-	
-	FWR_FAST(arr, arr, arr, N);
-
-	double seconds_since_start = difftime( time(0), start);
-	cout << "time: " << seconds_since_start << endl;
+	BASE = 128;
+	run();
+	// cout << "time: " << seconds_since_start << endl;
 
 	// print out the first 10
 	// for(int i = 0; i < min(N, TEST_V); i++) {
